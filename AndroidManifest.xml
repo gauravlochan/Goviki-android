@@ -24,8 +24,15 @@
         <activity
             android:label="Task Details"
             android:name="in.goviki.TaskActivity">
-            
         </activity>
+
+        <activity
+            android:label="Search Results"
+            android:name="in.goviki.SearchResultsActivity">
+        </activity>
+            
+            
+            
     </application>
 
 </manifest>

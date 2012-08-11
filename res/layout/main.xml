@@ -16,16 +16,17 @@
 	        android:layout_height="wrap_content"
 	        android:text="Search for a task"
 	        android:textAppearance="?android:attr/textAppearanceMedium" />
-	
-	    <EditText
-	        android:id="@+id/editText1"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content" >
-	
-	        <requestFocus />
-	    </EditText>
+
+	    <SearchView
+	        android:id="@+id/searchView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" 
+	        android:iconifiedByDefault="false">
+	    </SearchView>
     </LinearLayout>
         
+    <Space android:layout_width="match_parent" 
+        android:layout_height="20dp"/>
         
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -37,9 +38,9 @@
 	        android:id="@+id/textView2"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="Some Popular Tasks"
+	        android:text="Popular Tasks"
 	        android:textAppearance="?android:attr/textAppearanceMedium" />
-	
+
 	    <ListView
 	        android:id="@+id/listView1"
 	        android:layout_width="match_parent"

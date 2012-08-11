@@ -39,6 +39,7 @@ public class TaskActivity extends Activity {
         
         _toggleEditProcedure.setOnClickListener(new ToggleEditProcedureClickHandler() );
     }
+
     
     
     public class ToggleEditProcedureClickHandler implements View.OnClickListener 
