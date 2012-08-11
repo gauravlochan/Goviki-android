@@ -22,16 +22,14 @@ public class GovikiActivity extends Activity {
         setContentView(R.layout.main);
         
         listView1 = (ListView) findViewById(R.id.listView1);
-        Task[] items = {};
-                
-        adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, items);
+        adapter = new ArrayAdapter<Task>(GovikiActivity.this, android.R.layout.simple_list_item_1);
         listView1.setAdapter(adapter);
-        
+
         new GetTasksAsynchTask().execute();
     }
     
     
-    private class GetTasksAsynchTask extends AsyncTask<Void, Void, String> {
+    public class GetTasksAsynchTask extends AsyncTask<Void, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -48,12 +46,11 @@ public class GovikiActivity extends Activity {
         @Override
         protected void onPostExecute(String json) {
             // Add entries to list
-            
-            // HACK
-            Task[] tasks = HackyStuff.getTaskArray();
-            for (int i=0; i< tasks.length; i++) {
-                Task task = tasks[i];
-                adapter.add(task);
+            Task[] items = HackyStuff.getTaskArray();
+
+            for (int i=0; i< items.length; i++) {
+                Task item = items[i];
+                adapter.add(item);
             }
 
             
