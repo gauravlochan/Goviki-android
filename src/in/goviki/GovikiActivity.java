@@ -16,11 +16,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
 public class GovikiActivity extends Activity {
     
     String server = "http://goviki.herokuapp.com/tasks.json";
     ArrayAdapter<Task> adapter;
     ListView listView1;
+    Task[] items = {};
+    Gson gson = new Gson();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class GovikiActivity extends Activity {
         RESTHelper.postData(tasksUrl, nameValuePairs);
     }
     
+    
     public class GetTasksAsynchTask extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -53,18 +58,15 @@ public class GovikiActivity extends Activity {
 
         @Override
         protected String doInBackground(Void... params) {
-            return "";
-            
-            //String json = RESTHelper.simpleGet(server);
-            //return json;
+            String json = RESTHelper.simpleGet(server);
+            return json;
         }
 
         
         @Override
         protected void onPostExecute(String json) {
             // Add entries to list
-            Task[] items = HackyStuff.getTaskArray();
-
+            items = gson.fromJson(json, Task[].class);
             for (int i=0; i< items.length; i++) {
                 Task item = items[i];
                 adapter.add(item);
@@ -82,11 +84,12 @@ public class GovikiActivity extends Activity {
                     // Go into task details page
                     Intent intent = new Intent(view.getContext(), TaskActivity.class);
                     intent.putExtra("task_id", position);
+                    intent.putExtra("task", items[position]);
                     
                     startActivity(intent);
                 }
             });
         }
-
+        
     }
 }

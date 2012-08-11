@@ -1,39 +1,35 @@
 package in.goviki;
 
-public class Task {
+import java.io.Serializable;
 
-    public int id;
+public class Task implements Serializable{
 
-    public String name;
+    private static final long serialVersionUID = 1L;
+
+    int id;
+    public String title;
+    public String body;
     
     public String office;
-    public String address;
-    public SimpleGeoPoint location;
+    //public String address;
+    //public SimpleGeoPoint location;
     
-    public String procedure;
     
-    public Task(int id, String name, String office, String address, String procedure) {
+    public Task(int id, String name, String office, String address, String body) {
         this.id = id;
-        this.name = name;
-        this.office = office;
-        this.address = address;
-        this.procedure = procedure;
-        this.location = new SimpleGeoPoint("12.9833", "77.5833");
+        this.title = name;
+        this.body = body;
     }
-
 
     public Task(int id, String name, String office, String address) {
         this.id = id;
-        this.name = name;
-        this.office = office;
-        this.address = address;
-        this.procedure = "under construction";
-        this.location = new SimpleGeoPoint("12.9833", "77.5833");
+        this.title = name;
+        this.body = "";
     }
 
     @Override
     public String toString() {
-        return this.id + ". " + this.name;
+        return this.id + ". " + this.title;
     }
     
 }

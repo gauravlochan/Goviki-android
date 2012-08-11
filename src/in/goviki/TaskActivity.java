@@ -27,16 +27,15 @@ public class TaskActivity extends Activity {
         _toggleEditProcedure = (ToggleButton) findViewById( R.id.toggleButton1 );
         
         // Get the task from the intent
-        Integer task_id = getIntent().getExtras().getInt("task_id");
-        Task[] items = HackyStuff.getTaskArray();
-        Task thisTask = items[task_id];
+        Task task = (Task) getIntent().getExtras().getSerializable("task");
+        Task thisTask = task; 
 
-        this.setTitle(thisTask.name);
+        this.setTitle(thisTask.title);
 
         // Populate UI from the task details
         _officeTextView.setText(thisTask.office);
-        _addressTextView.setText(thisTask.address);
-        _procedureEditText.setText(thisTask.procedure);
+        //_addressTextView.setText(thisTask.address);
+        _procedureEditText.setText(thisTask.body);
         
         _toggleEditProcedure.setOnClickListener(new ToggleEditProcedureClickHandler() );
     }
