@@ -1,5 +1,11 @@
 package in.goviki;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -28,6 +34,15 @@ public class GovikiActivity extends Activity {
         new GetTasksAsynchTask().execute();
     }
     
+    public void postTask() {
+        // Add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("[task][body]", "12345"));
+        nameValuePairs.add(new BasicNameValuePair("task[title]", "Gaurav title"));
+        
+        String tasksUrl = "http://goviki.herokuapp.com/tasks/";
+        RESTHelper.postData(tasksUrl, nameValuePairs);
+    }
     
     public class GetTasksAsynchTask extends AsyncTask<Void, Void, String> {
 
@@ -38,8 +53,10 @@ public class GovikiActivity extends Activity {
 
         @Override
         protected String doInBackground(Void... params) {
-            String json = RESTHelper.simpleGet(server);
-            return json;
+            return "";
+            
+            //String json = RESTHelper.simpleGet(server);
+            //return json;
         }
 
         
