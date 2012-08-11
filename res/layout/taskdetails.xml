@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/officeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Office"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/addressTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <Space android:layout_width="match_parent" 
+            android:layout_height="20dp"
+            />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            
+            <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Procedure:"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            />
+            
+            <ToggleButton
+            android:id="@+id/toggleButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="ToggleButton" 
+            android:textOn="Save"
+            android:textOff="Edit"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_gravity="right"/>
+            
+        </LinearLayout>
+
+    
+        <EditText
+            android:id="@+id/procEditText"
+            android:layout_width="match_parent"
+            android:layout_height="285dp" 
+            android:gravity="top"
+            android:inputType="none"
+            android:editable="false"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
