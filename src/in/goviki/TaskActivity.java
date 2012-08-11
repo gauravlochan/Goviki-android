@@ -1,4 +1,4 @@
-package in.fastr.goviki;
+package in.goviki;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -41,10 +41,7 @@ public class TaskActivity extends Activity {
         _toggleEditProcedure.setOnClickListener(new ToggleEditProcedureClickHandler() );
     }
     
-    /**
-     * Validates the input address/place.  If something is wrong, asks the user to fix it
-     * otherwise moves on and does something with the input
-     */
+    
     public class ToggleEditProcedureClickHandler implements View.OnClickListener 
     {
         public void onClick( View view ) {
@@ -56,7 +53,6 @@ public class TaskActivity extends Activity {
             }
         }
     }
-    
     
     
     

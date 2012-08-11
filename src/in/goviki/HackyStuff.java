@@ -1,4 +1,4 @@
-package in.fastr.goviki;
+package in.goviki;
 
 public class HackyStuff {
     
