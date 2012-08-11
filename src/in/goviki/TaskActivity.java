@@ -1,5 +1,11 @@
 package in.goviki;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -33,8 +39,8 @@ public class TaskActivity extends Activity {
         this.setTitle(thisTask.title);
 
         // Populate UI from the task details
-        _officeTextView.setText(thisTask.office);
-        //_addressTextView.setText(thisTask.address);
+        _officeTextView.setText( thisTask.getOffice() );
+        _addressTextView.setText( thisTask.getAddress() );
         _procedureEditText.setText(thisTask.body);
         
         _toggleEditProcedure.setOnClickListener(new ToggleEditProcedureClickHandler() );
@@ -49,12 +55,23 @@ public class TaskActivity extends Activity {
             if (_toggleEditProcedure.isChecked() ) {
                 _procedureEditText.setInputType(InputType.TYPE_CLASS_TEXT);
             } else {
+                // Submit!
+                
                 _procedureEditText.setInputType(InputType.TYPE_NULL);
             }
         }
     }
     
-    
+    // Used to create a task
+    public void postTask() {
+        // Add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("[task][body]", "12345"));
+        nameValuePairs.add(new BasicNameValuePair("task[title]", "Gaurav title"));
+        
+        String tasksUrl = "http://goviki.herokuapp.com/tasks/";
+        RESTHelper.postData(tasksUrl, nameValuePairs);
+    }
     
 
 }

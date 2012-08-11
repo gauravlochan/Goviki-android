@@ -10,10 +10,22 @@ public class Task implements Serializable{
     public String title;
     public String body;
     
-    public String office;
-    //public String address;
-    //public SimpleGeoPoint location;
+    private Office[] offices;
     
+    public String getOffice() {
+        if ((offices != null) && (offices.length>0)) {
+            return offices[0].name;
+        }
+        return "";
+    }
+    
+    public String getAddress() {
+        if ((offices != null) && (offices.length>0)) {
+            return offices[0].address;
+        }
+        return "";
+    }
+
     
     public Task(int id, String name, String office, String address, String body) {
         this.id = id;
