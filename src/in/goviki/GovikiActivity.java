@@ -44,7 +44,7 @@ public class GovikiActivity extends Activity {
         listView1 = (ListView) findViewById(R.id.listView1);
 
         // Bind the list view to an empty adapter
-        adapter = new ArrayAdapter<Task>(GovikiActivity.this, android.R.layout.simple_list_item_1);
+        adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1);
         listView1.setAdapter(adapter);
 
         // Enable search requests
