@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 public class GovikiActivity extends Activity {
     ListView listView1;
     SearchView searchView;
+    ProgressBar progressBar;
     
     String allTasksUrl = "http://goviki.herokuapp.com/tasks.json";
     String searchTasksUrl = "http://goviki.herokuapp.com/tasks.json?q=";
@@ -36,7 +38,9 @@ public class GovikiActivity extends Activity {
         
         searchView = (SearchView) findViewById(R.id.searchView1);
         listView1 = (ListView) findViewById(R.id.listView1);
-
+        progressBar = (ProgressBar)findViewById(R.id.progressBar1);
+        progressBar.setMax(100);
+        
         // Bind the list view to an empty adapter
         adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1);
         listView1.setAdapter(adapter);
@@ -141,6 +145,16 @@ public class GovikiActivity extends Activity {
         
         @Override
         protected void onPostExecute(String json) {
+            
+            //progressBar.setProgress(100);
+            progressBar.setVisibility(ProgressBar.GONE);
+            
+            // If nothing was found, stay on the activity and let user try again
+            if ((json==null) || (json.length()==0)) {
+                Toast.makeText(GovikiActivity.this, "No results found", Toast.LENGTH_LONG).show();
+                return;
+            }
+
             // Add entries to list
             items = gson.fromJson(json, Task[].class);
             for (int i=0; i< items.length; i++) {
