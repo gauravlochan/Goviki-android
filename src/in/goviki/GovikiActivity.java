@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -20,6 +22,7 @@ public class GovikiActivity extends Activity {
     ListView listView1;
     SearchView searchView;
     ProgressBar progressBar;
+    Button buttonFindNearest;
     
     String allTasksUrl = "http://goviki.herokuapp.com/tasks.json";
     String searchTasksUrl = "http://goviki.herokuapp.com/tasks.json?q=";
@@ -27,8 +30,6 @@ public class GovikiActivity extends Activity {
     ArrayAdapter<Task> adapter;
     Task[] items = {};
     Gson gson = new Gson();
-    
-    boolean showSearch = false;
     
 
     @Override
@@ -39,13 +40,13 @@ public class GovikiActivity extends Activity {
         searchView = (SearchView) findViewById(R.id.searchView1);
         listView1 = (ListView) findViewById(R.id.listView1);
         progressBar = (ProgressBar)findViewById(R.id.progressBar1);
-        progressBar.setMax(100);
+        buttonFindNearest = (Button) findViewById(R.id.button1);
         
         // Bind the list view to an empty adapter
         adapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1);
         listView1.setAdapter(adapter);
-
-        // Enable search requests
+        
+        buttonFindNearest.setOnClickListener(new ButtonListener());
         searchView.setOnQueryTextListener(new SearchListener());
         
         listView1.setOnItemClickListener(new OnItemClickListener() {
@@ -79,6 +80,17 @@ public class GovikiActivity extends Activity {
             new SearchAsyncTask().execute(new String[] { query });
             return true;
         }
+    }
+    
+    public class ButtonListener implements OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            // Go into task details page
+            Intent intent = new Intent(GovikiActivity.this, MyMapActivity.class);
+            startActivity(intent);
+        }
+        
     }
 
     
