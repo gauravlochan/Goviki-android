@@ -16,6 +16,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
@@ -34,7 +35,40 @@ public class RESTHelper {
     }
     
     
-    public static void postData(String url, List<NameValuePair> nameValuePairs) {
+    public static String putData(String url, List<NameValuePair> nameValuePairs) {
+        String result = "";
+        // Create a new HttpClient and Post Header
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPut httpPut = new HttpPut(url);
+
+        try {
+            httpPut.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+            // Execute HTTP Post Request
+            HttpResponse response = httpclient.execute(httpPut);
+            
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                InputStream instream = entity.getContent();
+                result = convertStreamToString(instream);
+                // Logger.debug(TAG, "Result of conversation: [" + result + "]");
+                instream.close();
+            } else {
+                Logger.debug(TAG, "Empty Http response");
+            }
+            
+        } catch (ClientProtocolException e) {
+            // TODO Auto-generated catch block
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+        }
+        
+        return result;
+    } 
+
+    
+    public static String postData(String url, List<NameValuePair> nameValuePairs) {
+        String result = "";
         // Create a new HttpClient and Post Header
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost(url);
@@ -45,11 +79,23 @@ public class RESTHelper {
             // Execute HTTP Post Request
             HttpResponse response = httpclient.execute(httppost);
             
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                InputStream instream = entity.getContent();
+                result = convertStreamToString(instream);
+                // Logger.debug(TAG, "Result of conversation: [" + result + "]");
+                instream.close();
+            } else {
+                Logger.debug(TAG, "Empty Http response");
+            }
+            
         } catch (ClientProtocolException e) {
             // TODO Auto-generated catch block
         } catch (IOException e) {
             // TODO Auto-generated catch block
         }
+        
+        return result;
     } 
     
 	public static String simplePost(String server, String payload) {

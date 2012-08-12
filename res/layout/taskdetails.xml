@@ -66,11 +66,13 @@
     
         <EditText
             android:id="@+id/procEditText"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="285dp" 
             android:gravity="top"
-            android:inputType="none"
-            android:editable="false"
+            android:inputType="textMultiLine"
+            android:enabled="false"
+            android:singleLine="false"
+            android:scrollHorizontally="false"
             />
 
     </LinearLayout>
