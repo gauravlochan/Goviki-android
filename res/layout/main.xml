@@ -38,7 +38,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find the nearest task"
+        android:text="Get nearby tasks"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Button

@@ -2,6 +2,8 @@ package in.goviki;
 
 import java.io.Serializable;
 
+import com.google.android.maps.GeoPoint;
+
 /**
  * A simple representation of a geopoint.
  * 
@@ -23,11 +25,20 @@ public class SimpleGeoPoint implements Serializable {
 		this.longitude = longitude;
 	}
 	
+	public SimpleGeoPoint(GeoPoint geoPoint) {
+		latitude = geoPoint.getLatitudeE6() / 1000000F;
+		longitude = geoPoint.getLongitudeE6() / 1000000F;
+	}
+	
 	public SimpleGeoPoint(String latitude, String longitude) {
 	    this.latitude = new Double(latitude);
 	    this.longitude = new Double(longitude);
 	}
 
+	public GeoPoint getGeoPoint() {
+		return new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
+	}
+	
 	@Override
 	public String toString() {
 		return latitude+","+longitude;
